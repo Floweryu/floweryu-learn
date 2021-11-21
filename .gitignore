@@ -4,3 +4,4 @@
 *.ipr
 .mvn
 mvnw*
+target
