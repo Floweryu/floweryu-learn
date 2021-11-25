@@ -1,4 +1,4 @@
-package observe;
+package com.floweryu.observe;
 
 /**
  * @author Floweryu
