@@ -12,6 +12,7 @@
         <module>design-mode</module>
         <module>java-basic</module>
         <module>spring-boot</module>
+        <module>xiaomi</module>
     </modules>
 
     <properties>

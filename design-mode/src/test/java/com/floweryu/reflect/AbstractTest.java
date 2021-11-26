@@ -5,6 +5,7 @@ import com.floweryu.reflect.abstracts.InterfaceExample;
 import org.junit.Test;
 
 import java.lang.reflect.Modifier;
+import java.util.Date;
 
 /**
  * @author zhangjunfeng
@@ -12,7 +13,7 @@ import java.lang.reflect.Modifier;
  */
 public class AbstractTest {
     /**
-     * 检测抽象类是不是abstract
+     * 检测抽象类
      * 输出: true
      */
     @Test 
@@ -23,13 +24,39 @@ public class AbstractTest {
     }
 
     /**
-     * 检测接口是不是abstract
-     * 输出: true
+     * 检测接口
+     * 输出: true true
      */
     @Test
     public void givenInterface_whenCheckModifierIsAbstract_thenTrue() {
         Class<InterfaceExample> clazz = InterfaceExample.class;
+        int mod = clazz.getModifiers();
+        System.out.println(Modifier.isInterface(mod));  // true
+        System.out.println(Modifier.isAbstract(clazz.getModifiers()));  // true
+    }
 
-        System.out.println(Modifier.isAbstract(clazz.getModifiers()));
+    /**
+     * 测试抽象类
+     */
+    @Test
+    public void givenAbstractClass_whenCheckIsAbstractClass_thenTrue() {
+        Class<AbstractExample> clazz = AbstractExample.class;
+        int mod = clazz.getModifiers();
+
+        System.out.println(Modifier.isInterface(mod));  // false
+        System.out.println(Modifier.isAbstract(mod));   // true
+    }
+
+    /**
+     * 测试实现类
+     * 返回false, false
+     */
+    @Test
+    public void givenConcreteClass_whenCheckIsAbstractClass_thenFalse() {
+        Class<Date> clazz = Date.class;
+        int mod = clazz.getModifiers();
+
+        System.out.println(Modifier.isInterface(mod));  // false
+        System.out.println(Modifier.isAbstract(mod));   // false
     }
 }
