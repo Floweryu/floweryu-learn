@@ -13,6 +13,7 @@
         <module>java-basic</module>
         <module>spring-boot</module>
         <module>xiaomi</module>
+        <module>rocketmq</module>
     </modules>
 
     <properties>
