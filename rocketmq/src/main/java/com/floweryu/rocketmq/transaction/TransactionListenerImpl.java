@@ -16,6 +16,9 @@ public class TransactionListenerImpl implements TransactionListener {
     private AtomicInteger transactionIndex = new AtomicInteger(0);
     private ConcurrentHashMap<String, Integer> localTrans = new ConcurrentHashMap<>();
 
+    /**
+     * 消息发送成功, 记录本地事务状态, 如果是UNKNOW, 会通过下面事务消息状态回查决定是否提交或回滚
+     */
     @Override
     public LocalTransactionState executeLocalTransaction(Message msg, Object arg) {
         int value = transactionIndex.getAndIncrement();
@@ -24,6 +27,11 @@ public class TransactionListenerImpl implements TransactionListener {
         return LocalTransactionState.UNKNOW;
     }
 
+    /**
+     * 事务消息状态回查
+     * COMMIT_MESSAGE : 提交消息到自定义主题下
+     * UNKNOW 或 ROLLBACK_MESSAGE : 消息将会放在 RMQ_SYS_TRANS_HALF_TOPIC 下
+     */
     @Override
     public LocalTransactionState checkLocalTransaction(MessageExt msg) {
         Integer status = localTrans.get(msg.getTransactionId());
