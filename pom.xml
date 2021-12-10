@@ -14,6 +14,7 @@
         <module>spring-boot</module>
         <module>xiaomi</module>
         <module>rocketmq</module>
+        <module>java-jdk</module>
     </modules>
 
     <properties>
