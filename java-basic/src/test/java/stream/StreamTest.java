@@ -24,4 +24,11 @@ public class StreamTest {
             System.out.println("key: " + key + "    value: " + value);
         });
     }
+    
+    @Test
+    public void testIntegerMax() {
+        int a = Integer.MAX_VALUE;
+        System.out.println(a);
+        System.out.println(a + 1);
+    }
 }
