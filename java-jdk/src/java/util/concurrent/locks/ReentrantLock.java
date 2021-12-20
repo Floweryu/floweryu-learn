@@ -146,14 +146,25 @@ public class ReentrantLock implements Lock, java.io.Serializable {
         }
 
         protected final boolean tryRelease(int releases) {
+            // 从AQS中获取state, 然后减去释放的值
             int c = getState() - releases;
+            
+            // 如果当前线程未持锁, 直接抛出异常
             if (Thread.currentThread() != getExclusiveOwnerThread())
                 throw new IllegalMonitorStateException();
+            
+            // 当前线程持有锁
+            // 是否已经完全释放锁, 默认false
             boolean free = false;
+            
+            // 条件成立, 说明当前线程已经完全达到释放锁的条件
             if (c == 0) {
                 free = true;
+                // 设置当前持锁线程为null
                 setExclusiveOwnerThread(null);
             }
+            
+            // 设置AQS中state的值为c
             setState(c);
             return free;
         }
@@ -220,6 +231,8 @@ public class ReentrantLock implements Lock, java.io.Serializable {
     static final class FairSync extends Sync {
         private static final long serialVersionUID = -3000897897090466540L;
 
+        // 公平锁入口
+        // 不响应中断的加锁
         final void lock() {
             acquire(1);
         }
@@ -227,24 +240,50 @@ public class ReentrantLock implements Lock, java.io.Serializable {
         /**
          * Fair version of tryAcquire.  Don't grant access unless
          * recursive call or no waiters or is first.
+         * 抢占成功：返回true, 包含重入锁
+         * 抢占失败：返回false
          */
         protected final boolean tryAcquire(int acquires) {
+            // 获取当前线程
             final Thread current = Thread.currentThread();
+            // 获取AQS中当前status状态
             int c = getState();
+            
+            // 条件成立: c == 0 表示  当前AQS处于无锁的状态
             if (c == 0) {
+                // 条件一: hasQueuedPredecessors()
+                // 因为FairSync是公平锁，任何时候获取锁都需要检查一下队列中在当前需要获取锁的线程前有无等待者
+                // hasQueuedPredecessors()方法返回true表示当前线程前面有等待者, 当前线程需要入队等待
+                // hasQueuedPredecessors()方法返回false表示当前线程前面无等待者, 直接可以获取锁
+                
+                // 条件二: compareAndSetState(0, acquires) CAS设置state值, 由于是从条件一进入的此处, 队列中没有线程, CAS的预期值是0
+                // 成功: 说明当前线程抢占锁成功
+                // 失败: 说明存在竞争, 且当前线程竞争锁失败
                 if (!hasQueuedPredecessors() &&
                     compareAndSetState(0, acquires)) {
+                    // 如果当前线程前面没有等待线程, 并且成功获取到锁
+                    // 设置当前线程为独占锁的线程
                     setExclusiveOwnerThread(current);
                     return true;
                 }
             }
+            // 执行到此处的情况：c != 0 或 c > 0
+            // 这种情况需要判断当前线程是不是独占锁的线程, 因为ReentrantLock是可重入锁
             else if (current == getExclusiveOwnerThread()) {
+                // 可重入锁的逻辑
+                // nextc 是更新AQS的state的值
                 int nextc = c + acquires;
+                // 越界判断, 当重入的深度很深时, 会导致nextc<0, state的最大值是int, int值达到最大之后 再+1...变负数..
                 if (nextc < 0)
                     throw new Error("Maximum lock count exceeded");
+                // 设置state的值
                 setState(nextc);
                 return true;
             }
+            
+            // 执行到这里的情况
+            // 1. c==0时, CAS失败, CAS修改state时未抢过其他线程
+            // 2. c!=0或c>0时, 当前线程不是独占锁线程
             return false;
         }
     }

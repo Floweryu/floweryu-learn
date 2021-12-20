@@ -34,5 +34,13 @@ public class StreamTest {
         long count = Arrays.stream(tags.split(",")).distinct().count();
         System.out.println(count);
         System.out.println(res);
+
+    }
+
+    @Test
+    public void testIntegerMax() {
+        int a = Integer.MAX_VALUE;
+        System.out.println(a);
+        System.out.println(a + 1);
     }
 }
