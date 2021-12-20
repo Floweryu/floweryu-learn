@@ -24,4 +24,15 @@ public class StreamTest {
             System.out.println("key: " + key + "    value: " + value);
         });
     }
+    
+    @Test
+    public void testMatch() {
+        String tags = "yyyy_vduet_docid_2334,yyyy_followshot_docid_99990,yyyy_followshot_docid_99990";
+        String tags1 = "dafsgdh,93932ijf,yyyy_followshot_docid_99990";
+        
+        boolean res = Arrays.stream(tags.split(",")).allMatch(item -> item.startsWith("yyyy_vduet_docid") || item.startsWith("yyyy_followshot_docid"));
+        long count = Arrays.stream(tags.split(",")).distinct().count();
+        System.out.println(count);
+        System.out.println(res);
+    }
 }
