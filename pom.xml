@@ -12,9 +12,9 @@
         <module>design-mode</module>
         <module>java-basic</module>
         <module>spring-boot</module>
-        <module>xiaomi</module>
         <module>rocketmq</module>
         <module>java-jdk</module>
+        <module>spring</module>
     </modules>
 
     <properties>
