@@ -1,6 +1,6 @@
-package com.example.validation.common;
+package com.floweryu.example.validation.common;
 
-import com.example.validation.controller.PersonController;
+import com.floweryu.example.validation.controller.PersonController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

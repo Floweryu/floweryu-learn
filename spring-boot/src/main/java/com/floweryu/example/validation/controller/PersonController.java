@@ -1,6 +1,6 @@
-package com.example.validation.controller;
+package com.floweryu.example.validation.controller;
 
-import com.example.validation.controller.param.PersonParam;
+import com.floweryu.example.validation.controller.param.PersonParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,4 +1,4 @@
-package com.example.validation.controller.param;
+package com.floweryu.example.validation.controller.param;
 
 import lombok.Data;
 

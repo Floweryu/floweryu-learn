@@ -1,4 +1,4 @@
-package com.example.validation;
+package com.floweryu.example.validation;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
