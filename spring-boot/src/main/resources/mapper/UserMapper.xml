@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.floweryu.example.mybatis.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.floweryu.example.mybatis.entity.User">
+        <id column="id" jdbcType="INTEGER" javaType="Integer" property="id" />
+        <result column="user_id" jdbcType="VARCHAR" javaType="String" property="userId" />
+        <result column="name" jdbcType="VARCHAR" javaType="String" property="name" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, user_id, `name`
+    </sql>
+    
+    <insert id="insert" parameterType="com.floweryu.example.mybatis.entity.User">
+        insert into t_user (user_id, name)
+        values (#{userId}, #{name})
+    </insert>
+    
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_user;
+    </select>
+</mapper>

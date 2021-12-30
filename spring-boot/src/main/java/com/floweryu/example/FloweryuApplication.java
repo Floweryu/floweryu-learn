@@ -1,15 +1,15 @@
-package com.floweryu.example.postconstruct;
+package com.floweryu.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Floweryu
- * @date 2021/12/27 23:40
+ * @date 2021/12/30 23:57
  */
 @SpringBootApplication
-public class PostConstructApplication {
+public class FloweryuApplication {
     public static void main(String[] args) {
-        SpringApplication.run(PostConstructApplication.class);
+        SpringApplication.run(FloweryuApplication.class);
     }
 }
