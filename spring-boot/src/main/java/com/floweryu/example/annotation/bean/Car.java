@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Floweryu
@@ -13,9 +17,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @NoArgsConstructor
 @ToString
 @ConfigurationProperties(prefix = "car")
+@Validated
 public class Car {
+    @NotNull
     private String name;
     
+    @NotEmpty
     private Integer price;
 
     private Pet pet;

@@ -14,6 +14,6 @@ mybatis:
   
 car:
   name: timi
-  price: 19000
+  price: 111
   pet: 
     name: pig
