@@ -2,7 +2,6 @@ package com.floweryu.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * @author Floweryu
@@ -11,13 +10,13 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class FloweryuApplication {
     public static void main(String[] args) {
-        ConfigurableApplicationContext context =  SpringApplication.run(FloweryuApplication.class);
-        System.out.println(context.getBeanDefinitionNames().length);
-        for (String name : context.getBeanDefinitionNames()) {
-            System.out.println(name);
-        }
-        int count = context.getBeanDefinitionCount();
-        System.out.println(count);
+        SpringApplication.run(FloweryuApplication.class);
+//        System.out.println(context.getBeanDefinitionNames().length);
+//        for (String name : context.getBeanDefinitionNames()) {
+//            System.out.println(name);
+//        }
+//        int count = context.getBeanDefinitionCount();
+//        System.out.println(count);
 //
 //        User user1 = context.getBean("Dogger", User.class);
 //        User user2 = context.getBean("Dogger", User.class);

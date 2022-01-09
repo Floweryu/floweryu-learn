@@ -22,7 +22,7 @@ public class MyConfig {
 
     @Bean("Tom")
     public Pet petBean() {
-        return new Pet("cat");
+        return new Pet("cat", 18);
     }
 
     /**
