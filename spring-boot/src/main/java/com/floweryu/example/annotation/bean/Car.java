@@ -6,7 +6,6 @@ import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -22,7 +21,6 @@ public class Car {
     @NotNull
     private String name;
     
-    @NotEmpty
     private Integer price;
 
     private Pet pet;
