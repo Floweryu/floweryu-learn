@@ -4,4 +4,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     
     <bean id="myTestBean" class="com.floweryu.example.bean.MyTestBean" />
+    
+    <bean id="book" class="com.floweryu.example.bean.Book">
+        <!--使用property完成属性注入
+            name: 类里面属性的名称
+            value: 向属性注入的值
+         -->
+        <property name="bname" value="spring实战" />
+        <property name="bauthor" value="鸭梨山大" />
+    </bean>
 </beans>

@@ -1,9 +1,8 @@
 package com.floweryu.example.bean;
 
 import org.junit.Test;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @author Floweryu
@@ -12,8 +11,15 @@ import org.springframework.core.io.ClassPathResource;
 public class BeanFactoryTest {
     @Test
     public void testBeanLoad() {
-        BeanFactory bf = new XmlBeanFactory(new ClassPathResource("beanFactoryTest.xml"));
+        ApplicationContext bf = new ClassPathXmlApplicationContext("beanFactoryTest.xml");
         MyTestBean bean = (MyTestBean) bf.getBean("myTestBean");
         System.out.println(bean.getTestStr());
+    }
+    
+    @Test
+    public void testBook() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("beanFactoryTest.xml");
+        Book book = (Book) context.getBean("book");
+        System.out.println(book);
     }
 }

@@ -7,6 +7,11 @@ spring:
     username: root
     password: mysql
     driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    static-path-pattern: /res/**
+  web:
+    resources:
+      static-locations: classpath:/other/
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

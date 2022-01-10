@@ -8,5 +8,5 @@ import lombok.Data;
  */
 @Data
 public class MyTestBean {
-    private String testStr = "testStr";
+    private String testStr;
 }
