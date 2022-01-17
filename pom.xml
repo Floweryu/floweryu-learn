@@ -15,7 +15,6 @@
         <module>rocketmq</module>
         <module>java-jdk</module>
         <module>spring</module>
-        <module>xiaomi</module>
     </modules>
 
     <properties>
