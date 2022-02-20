@@ -6,8 +6,6 @@ import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotNull;
-
 /**
  * @author Floweryu
  * @date 2022/1/3 21:42
@@ -18,7 +16,6 @@ import javax.validation.constraints.NotNull;
 @ConfigurationProperties(prefix = "car")
 @Validated
 public class Car {
-    @NotNull
     private String name;
     
     private Integer price;
