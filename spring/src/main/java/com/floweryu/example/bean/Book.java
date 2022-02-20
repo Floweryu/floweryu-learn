@@ -1,5 +1,6 @@
 package com.floweryu.example.bean;
 
+import lombok.AllArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -7,6 +8,7 @@ import lombok.ToString;
  * @date 2022/1/10 23:13
  */
 @ToString
+@AllArgsConstructor
 public class Book {
     private String bname;
     
