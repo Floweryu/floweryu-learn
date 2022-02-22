@@ -3,7 +3,7 @@ package com.floweryu.example.config;
 import com.floweryu.example.bean.Book;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.Lazy;
 
 /**
  * @author Floweryu
@@ -12,10 +12,10 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class MainConfig2 {
     
-    @Scope("prototype")
+    @Lazy
     @Bean("book")
     public Book book() {
-        System.out.println("book is load...");
+        System.out.println("向容器中添加book...");
         return new Book("小王子", "猫儿");
     }
 }
