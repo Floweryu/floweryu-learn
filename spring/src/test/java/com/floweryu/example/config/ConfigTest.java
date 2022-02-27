@@ -2,6 +2,7 @@ package com.floweryu.example.config;
 
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
  * @author Floweryu
@@ -25,6 +26,9 @@ public class ConfigTest {
 
     @Test
     public void config2Test() {
+        ConfigurableEnvironment environment = context.getEnvironment();
+        String property = environment.getProperty("os.name");
+        System.out.println(property);
         System.out.println("容器创建完成");
         Object bean = context.getBean("book");
     }

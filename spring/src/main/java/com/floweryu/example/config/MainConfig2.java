@@ -3,12 +3,11 @@ package com.floweryu.example.config;
 import com.floweryu.example.bean.Book;
 import com.floweryu.example.bean.Color;
 import com.floweryu.example.bean.Red;
+import com.floweryu.example.condition.LinuxCondition;
 import com.floweryu.example.condition.MyImportBeanDefinitionRegistrar;
 import com.floweryu.example.condition.MyImportSelector;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Lazy;
+import com.floweryu.example.condition.WindowsCondition;
+import org.springframework.context.annotation.*;
 
 /**
  * @author Floweryu
@@ -23,5 +22,17 @@ public class MainConfig2 {
     public Book book() {
         System.out.println("向容器中添加book...");
         return new Book("小王子", "猫儿");
+    }
+    
+    @Conditional({WindowsCondition.class})
+    @Bean("windows")
+    public Book book1() {
+        return new Book("Windows", "11");
+    }
+
+    @Conditional({LinuxCondition.class})
+    @Bean("linux")
+    public Book book2() {
+        return new Book("linux", "8");
     }
 }
