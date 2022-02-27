@@ -9,9 +9,22 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  */
 public class ConfigTest {
 
+    AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MainConfig2.class);
+    
+    private void printNames() {
+        String[] names = context.getBeanDefinitionNames();
+        for (String name : names) {
+            System.out.println(name);
+        }
+    }
+    
+    @Test
+    public void importTest() {
+        printNames();
+    }
+
     @Test
     public void config2Test() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MainConfig2.class);
         System.out.println("容器创建完成");
         Object bean = context.getBean("book");
     }

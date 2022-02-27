@@ -1,8 +1,13 @@
 package com.floweryu.example.config;
 
 import com.floweryu.example.bean.Book;
+import com.floweryu.example.bean.Color;
+import com.floweryu.example.bean.Red;
+import com.floweryu.example.condition.MyImportBeanDefinitionRegistrar;
+import com.floweryu.example.condition.MyImportSelector;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 
 /**
@@ -10,6 +15,7 @@ import org.springframework.context.annotation.Lazy;
  * @date 2022/2/20 22:46
  */
 @Configuration
+@Import({Color.class, Red.class, MyImportSelector.class, MyImportBeanDefinitionRegistrar.class})
 public class MainConfig2 {
     
     @Lazy
