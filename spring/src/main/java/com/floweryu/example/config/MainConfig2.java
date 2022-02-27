@@ -2,6 +2,7 @@ package com.floweryu.example.config;
 
 import com.floweryu.example.bean.Book;
 import com.floweryu.example.bean.Color;
+import com.floweryu.example.bean.ColorFactoryBean;
 import com.floweryu.example.bean.Red;
 import com.floweryu.example.condition.LinuxCondition;
 import com.floweryu.example.condition.MyImportBeanDefinitionRegistrar;
@@ -34,5 +35,10 @@ public class MainConfig2 {
     @Bean("linux")
     public Book book2() {
         return new Book("linux", "8");
+    }
+    
+    @Bean
+    public ColorFactoryBean colorFactoryBean() {
+        return new ColorFactoryBean();
     }
 }

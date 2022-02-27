@@ -22,6 +22,8 @@ public class ConfigTest {
     @Test
     public void importTest() {
         printNames();
+        Object colorFactortyBean = context.getBean("&colorFactoryBean");
+        System.out.println("colorFactoryBean...  " + colorFactortyBean.getClass());
     }
 
     @Test
