@@ -10,7 +10,15 @@ import org.springframework.core.env.ConfigurableEnvironment;
  */
 public class ConfigTest {
 
-    AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MainConfig2.class);
+    AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MainConfigOfLifeCycle.class);
+    
+    @Test
+    public void lifeCycleTest() {
+        System.out.println(context);
+//        Car bean = context.getBean(Car.class);
+        context.close();
+    }
+    
     
     private void printNames() {
         String[] names = context.getBeanDefinitionNames();
