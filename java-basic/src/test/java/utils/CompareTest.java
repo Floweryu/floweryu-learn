@@ -3,6 +3,7 @@ package utils;
 import bean.Employee;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,14 +15,16 @@ import java.util.stream.Collectors;
 public class CompareTest {
     @Test
     public void sortTest() {
-        List<Employee> collect = CompareUtils.list.stream().sorted(new Comparator<Employee>() {
+        Integer[] nums = new Integer[]{1, 4, 3, 5, 2, 7, 6};
+        Arrays.sort(nums, new Comparator<Integer>() {
+
             @Override
-            public int compare(Employee o1, Employee o2) {
-                int res = o1.getAge() - o2.getAge();
-                System.out.println("res: " + res);
-                return res;
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;
             }
-        }).collect(Collectors.toList());
-        collect.forEach(System.out::println);
+        });
+        for (Integer i : nums) {
+            System.out.print(i + "  ");
+        }
     }
 }
