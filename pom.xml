@@ -13,7 +13,6 @@
         <module>java-basic</module>
         <module>spring-boot</module>
         <module>rocketmq</module>
-        <module>java-jdk</module>
         <module>spring</module>
         <module>zookeeper</module>
     </modules>
