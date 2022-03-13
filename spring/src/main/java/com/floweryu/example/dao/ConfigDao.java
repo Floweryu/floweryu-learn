@@ -8,4 +8,17 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class ConfigDao {
+    
+    private String label = "1";
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    @Override
+    public String toString() {
+        return "ConfigDao{" +
+                "label='" + label + '\'' +
+                '}';
+    }
 }

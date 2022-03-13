@@ -1,5 +1,7 @@
 package com.floweryu.example.controller;
 
+import com.floweryu.example.service.ConfigService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -8,4 +10,7 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class ConfugController {
+    
+    @Autowired
+    private ConfigService configService;
 }
