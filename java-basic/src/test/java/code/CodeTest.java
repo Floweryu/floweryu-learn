@@ -47,6 +47,23 @@ public class CodeTest {
         
         return res[n - 1];
     }
+
+    public int maxProfit(int[] prices) {
+        if (prices.length <= 1) {
+            return 0;
+        }
+        // mini记录prices的最小值
+        int maxn = 0, mini = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            // 遇到比mini小的, 替换mini值
+            if (prices[i] <= mini) {
+                mini = prices[i];
+            } else { // 遇到比mini大的, 计算差值
+                maxn = Math.max(maxn, prices[i] - mini);
+            }
+        }
+        return maxn;
+    }
     
     @Test
     public void codeTest() {
