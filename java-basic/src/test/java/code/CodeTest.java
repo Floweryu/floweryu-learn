@@ -64,6 +64,27 @@ public class CodeTest {
         }
         return maxn;
     }
+
+    /**
+     * No.2044
+     * @url https://leetcode-cn.com/problems/count-number-of-maximum-bitwise-or-subsets/
+     */
+    public int countMaxOrSubsets(int[] nums) {
+        int max = 0;
+        for (int num : nums) {
+            max |= num;
+        }
+        return dfs(0, nums, 0, max);
+    }
+    
+    private int dfs(int curIndex, int[] nums, int curValue, int max) {
+        if (curIndex == nums.length - 1) {
+            return curValue == max ? 1 : 0;
+        }
+        // 
+        return dfs(curIndex + 1, nums, curValue | nums[curIndex], max) + dfs(curIndex + 1, nums, curValue, max);
+    }
+    
     
     @Test
     public void codeTest() {
