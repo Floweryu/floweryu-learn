@@ -115,7 +115,45 @@ public class CodeTest {
         }
 
     }
-    
+
+    public int maxProfit(int[] prices) {
+        if (prices.length <= 1) {
+            return 0;
+        }
+        // mini记录prices的最小值
+        int maxn = 0, mini = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            // 遇到比mini小的, 替换mini值
+            if (prices[i] <= mini) {
+                mini = prices[i];
+            } else { // 遇到比mini大的, 计算差值
+                maxn = Math.max(maxn, prices[i] - mini);
+            }
+        }
+        return maxn;
+    }
+
+    /**
+     * No.2044
+     * @url https://leetcode-cn.com/problems/count-number-of-maximum-bitwise-or-subsets/
+     */
+    public int countMaxOrSubsets(int[] nums) {
+        int max = 0;
+        for (int num : nums) {
+            max |= num;
+        }
+        return dfs(0, nums, 0, max);
+    }
+
+    private int dfs(int curIndex, int[] nums, int curValue, int max) {
+        if (curIndex == nums.length - 1) {
+            return curValue == max ? 1 : 0;
+        }
+        //
+        return dfs(curIndex + 1, nums, curValue | nums[curIndex], max) + dfs(curIndex + 1, nums, curValue, max);
+    }
+
+
     @Test
     public void codeTest() {
         int[] nums = new int[]{5,19,8,1};
