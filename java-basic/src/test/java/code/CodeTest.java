@@ -84,7 +84,35 @@ public class CodeTest {
         // 
         return dfs(curIndex + 1, nums, curValue | nums[curIndex], max) + dfs(curIndex + 1, nums, curValue, max);
     }
+
+    /**
+     * LeetCode.661
+     * @param img
+     * @return
+     */
+    public int[][] imageSmoother(int[][] img) {
+        int m = img.length, n = img[0].length;
+        int[][] res = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                res[i][j] = calc(i, j, m, n, img);
+            }
+        }
+        return res;
+    }
     
+    private int calc(int i, int j, int m, int n, int[][] img) {
+        int sum = 0, count = 0;
+        for (int a = i - 1; a <= i + 1; a++) {
+            for (int b = j - 1; b <= j + 1; b++) {
+                if (a >= 0 && a < m && b >= 0 && b < n) {
+                    sum += img[a][b];
+                    count++;
+                }
+            }
+        }
+        return sum / count;
+    }
     
     @Test
     public void codeTest() {
