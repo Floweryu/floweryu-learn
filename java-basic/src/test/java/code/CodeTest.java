@@ -183,11 +183,34 @@ public class CodeTest {
         }
         return sum / count;
     }
+
+    /**
+     * 118.杨辉三角
+     * @param numRows
+     * @return
+     */
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> tmp = new ArrayList<>();
+            for (int a = 0; a < i + 1; a++) {
+                if (a > 0 && a < i) {
+                    tmp.add(res.get(i - 1).get(a - 1) + res.get(i - 1).get(a));
+                } else {
+                    tmp.add(1);
+                }
+            }
+            res.add(tmp);
+        }
+        return res;
+    }
     
     @Test
     public void codeTest() {
-        int[] nums = new int[]{5,19,8,1};
-        int res1 = halveArray(nums);
-        System.out.println(res1);
+        List<List<Integer>> generate = generate(5);
+        for (List<Integer> list : generate) {
+            System.out.println(list.toString());
+        }
+        
     }
 }
