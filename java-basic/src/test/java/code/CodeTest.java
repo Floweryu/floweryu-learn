@@ -204,13 +204,24 @@ public class CodeTest {
         }
         return res;
     }
+
+    /**
+     * Leetcode.693
+     * @param n
+     * @return
+     */
+    public boolean hasAlternatingBits(int n) {
+        String str = Integer.toBinaryString(n);
+        for (int i = 0; i < str.length() - 1; i++) {
+            if (str.charAt(i) == str.charAt(i + 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
     
     @Test
     public void codeTest() {
-        List<List<Integer>> generate = generate(5);
-        for (List<Integer> list : generate) {
-            System.out.println(list.toString());
-        }
-        
+        System.out.println(hasAlternatingBits(5));
     }
 }
