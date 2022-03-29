@@ -1,6 +1,7 @@
 package com.floweryu.example.zookeeper;
 
 import com.floweryu.example.bean.factory.ClientFactory;
+import com.floweryu.example.utils.IdMakeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.utils.CloseableUtils;
@@ -58,5 +59,15 @@ public class CuratorTest extends BaseTest {
         } finally {
             CloseableUtils.closeQuietly(client);
         }
+    }
+    
+    
+    @Test
+    public void makeIdTest() {
+        for (int i = 0; i < 10; i++) {
+            String uuid = IdMakeUtil.makeId("/uuid/id-" + i);
+            System.out.println(uuid);
+        }
+        
     }
 }
