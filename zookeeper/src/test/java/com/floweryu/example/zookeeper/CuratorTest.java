@@ -1,6 +1,7 @@
 package com.floweryu.example.zookeeper;
 
 import com.floweryu.example.bean.factory.ClientFactory;
+import com.floweryu.example.demo.ZkWatcherDemo;
 import com.floweryu.example.utils.IdMakeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
@@ -69,5 +70,11 @@ public class CuratorTest extends BaseTest {
             System.out.println(uuid);
         }
         
+    }
+    
+    @Test
+    public void watcherTest() {
+        ZkWatcherDemo zkWatcherDemo = new ZkWatcherDemo();
+        zkWatcherDemo.childrenCache();
     }
 }
