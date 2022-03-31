@@ -29,8 +29,10 @@ public class CuratorTest extends BaseTest {
             client.start();
             String data = "hello";
             byte[] payload = data.getBytes(StandardCharsets.UTF_8);
-            String path = "/curator/test1/sub1";
-            client.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT).forPath(path, payload);
+            for (int i = 0; i < 4; i++) {
+                String path = "/curator/test1/sub-" + i;
+                client.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT).forPath(path, payload);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

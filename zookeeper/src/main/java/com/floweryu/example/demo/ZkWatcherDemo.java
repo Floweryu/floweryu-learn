@@ -1,4 +1,4 @@
-﻿package com.floweryu.example.demo;
+package com.floweryu.example.demo;
 
 import com.floweryu.example.bean.factory.ClientFactory;
 import com.floweryu.example.utils.IdMakeUtil;
