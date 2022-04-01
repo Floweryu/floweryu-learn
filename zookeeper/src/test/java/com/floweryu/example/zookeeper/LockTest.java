@@ -1,7 +1,12 @@
 package com.floweryu.example.zookeeper;
 
+import com.floweryu.example.bean.ZkClient;
+import com.floweryu.example.bean.factory.ClientFactory;
 import com.floweryu.example.lock.ZkLock;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.recipes.locks.InterProcessMultiLock;
+import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.junit.Test;
 
 import java.util.concurrent.*;
@@ -37,6 +42,34 @@ public class LockTest extends BaseTest{
                 lock.unlock();
             });
             
+        }
+        Thread.sleep(Integer.MAX_VALUE);
+    }
+    
+    @Test
+    public void testZkMutex() throws InterruptedException {
+        CuratorFramework client = ClientFactory.createSimple("106.15.42.148:2181");
+        client.start();
+        final InterProcessMutex zkMutex = new InterProcessMutex(client, "/mutex");
+        for (int i = 0; i < 10; i++) {
+            executorService.submit(() -> {
+                try {
+                    zkMutex.acquire();
+                    for (int j = 0; j < 10; j++) {
+                        count++;
+                    }
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
+                    log.info("count = {}", count);
+                    zkMutex.release();
+                } catch(Exception e) {
+                    log.error("执行任务失败", e);
+                }
+            });
         }
         Thread.sleep(Integer.MAX_VALUE);
     }

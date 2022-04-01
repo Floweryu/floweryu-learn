@@ -1,6 +1,9 @@
 package com.floweryu.example.bean;
 
+import com.floweryu.example.bean.factory.ClientFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +19,18 @@ import java.util.List;
 @Slf4j
 @Component
 public class ZkClient {
+
+    public static final String ZK_ADDRESS = "106.15.42.148:2181";
     
     @Autowired
     private ZooKeeper zookeeper;
+    
+    
+    public static CuratorFramework getClient() {
+        CuratorFramework client = ClientFactory.createSimple(ZK_ADDRESS);
+        client.start();
+        return client;
+    }
 
     /**
      * 判断指定节点是否存在
