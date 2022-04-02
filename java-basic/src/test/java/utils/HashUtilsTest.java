@@ -31,5 +31,6 @@ public class HashUtilsTest {
         long one = cur + 60000;
         System.out.println(cur);
         System.out.println(one);
+        System.out.println((String) null);
     }
 }

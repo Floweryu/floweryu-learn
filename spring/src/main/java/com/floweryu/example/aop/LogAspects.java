@@ -1,6 +1,7 @@
 package com.floweryu.example.aop;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 
 import java.util.Arrays;
@@ -50,5 +51,13 @@ public class LogAspects {
     @AfterThrowing(value = "pointCut()", throwing = "ex")
     public void logException(Exception ex) {
         System.out.println("除法异常.......异常: {" + ex +"}");
+    }
+    
+    @Around("pointCut()")
+    public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        System.out.println("方法执行前调用========");
+        Object result = joinPoint.proceed();
+        System.out.println("方法执行后调用========");
+        return result;
     }
 }
