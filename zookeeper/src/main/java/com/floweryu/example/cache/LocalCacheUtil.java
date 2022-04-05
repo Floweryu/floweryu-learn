@@ -2,6 +2,7 @@ package com.floweryu.example.cache;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2022/3/6 14:04
  */
 @Component
+@Slf4j
 public class LocalCacheUtil {
 
     @Autowired
@@ -23,7 +25,21 @@ public class LocalCacheUtil {
      * key-分组名
      * value-每个组对应一个cache
      */
-    private static Map<String, Cache<String, Object>> cacheMap = new ConcurrentHashMap<>();
+    private Map<String, Cache<String, Object>> cacheMap = new ConcurrentHashMap<>();
+
+    public Map<String, Cache<String, Object>> getCacheMap() {
+        return cacheMap;
+    }
+
+    private void printMap() {
+        for (String key : cacheMap.keySet()) {
+            log.info("本地缓存的key={}", key);
+            Cache<String, Object> cache = cacheMap.get(key);
+            for (String item : cache.asMap().keySet()) {
+                log.info("缓存具体内容, key={}, value={}", item, cache.getIfPresent(item));
+            }
+        }
+    }
 
     /**
      * 获取该组的cache
@@ -68,6 +84,7 @@ public class LocalCacheUtil {
         Cache<String, Object> cache = getCache(group, expire);
         cache.put(key, val);
         zkClient.setWatcher(group, key, LocalCacheWatcher.getInstance());
+        printMap();
     }
 
     /**

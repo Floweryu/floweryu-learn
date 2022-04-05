@@ -4,6 +4,7 @@ import com.floweryu.example.bean.ZookeeperProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +30,7 @@ public class ZookeeperConfig {
                     .connectString(zookeeperProperties.getAddress())
                     .sessionTimeoutMs(zookeeperProperties.getTimeout())
                     .connectionTimeoutMs(zookeeperProperties.getTimeout())
-                    .retryPolicy((i, l, retrySleeper) -> true)
+                    .retryPolicy(new ExponentialBackoffRetry(1000, 3))
                     .build();
             curatorFramework.start();
             log.info("初始化ZooKeeper连接状态....={}", curatorFramework.getState());
