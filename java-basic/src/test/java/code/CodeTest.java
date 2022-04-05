@@ -154,10 +154,97 @@ public class CodeTest {
     }
 
 
+
+    /**
+     * LeetCode.661
+     * @param img
+     * @return
+     */
+    public int[][] imageSmoother(int[][] img) {
+        int m = img.length, n = img[0].length;
+        int[][] res = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                res[i][j] = calc(i, j, m, n, img);
+            }
+        }
+        return res;
+    }
+    
+    private int calc(int i, int j, int m, int n, int[][] img) {
+        int sum = 0, count = 0;
+        for (int a = i - 1; a <= i + 1; a++) {
+            for (int b = j - 1; b <= j + 1; b++) {
+                if (a >= 0 && a < m && b >= 0 && b < n) {
+                    sum += img[a][b];
+                    count++;
+                }
+            }
+        }
+        return sum / count;
+    }
+
+    /**
+     * 118.杨辉三角
+     * @param numRows
+     * @return
+     */
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> tmp = new ArrayList<>();
+            for (int a = 0; a < i + 1; a++) {
+                if (a > 0 && a < i) {
+                    tmp.add(res.get(i - 1).get(a - 1) + res.get(i - 1).get(a));
+                } else {
+                    tmp.add(1);
+                }
+            }
+            res.add(tmp);
+        }
+        return res;
+    }
+
+    /**
+     * Leetcode.693
+     * @param n
+     * @return
+     */
+    public boolean hasAlternatingBits(int n) {
+        String str = Integer.toBinaryString(n);
+        for (int i = 0; i < str.length() - 1; i++) {
+            if (str.charAt(i) == str.charAt(i + 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * T T F T T F T T
+     * @param answerKey
+     * @param k
+     * @return
+     */
+    public int maxConsecutiveAnswers(String answerKey, int k) {
+        return Math.max(maxConsecutiveChar(answerKey, k, 'T'), maxConsecutiveChar(answerKey, k, 'F'));
+    }
+
+    public int maxConsecutiveChar(String answerKey, int k, char ch) {
+        int n = answerKey.length();
+        int ans = 0;
+        for (int left = 0, right = 0, sum = 0; right < n; right++) {
+            sum += answerKey.charAt(right) != ch ? 1 : 0;
+            while (sum > k) {
+                sum -= answerKey.charAt(left++) != ch ? 1 : 0;
+            }
+            ans = Math.max(ans, right - left + 1);
+        }
+        return ans;
+    }
+    
     @Test
     public void codeTest() {
-        int[] nums = new int[]{5,19,8,1};
-        int res1 = halveArray(nums);
-        System.out.println(res1);
+        System.out.println(0);
     }
 }
