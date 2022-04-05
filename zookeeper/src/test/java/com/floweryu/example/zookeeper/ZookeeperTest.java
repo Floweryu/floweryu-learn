@@ -1,7 +1,7 @@
 package com.floweryu.example.zookeeper;
 
 import com.floweryu.example.ZookeeperApplication;
-import com.floweryu.example.bean.ZkClient;
+import com.floweryu.example.cache.ZkClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
