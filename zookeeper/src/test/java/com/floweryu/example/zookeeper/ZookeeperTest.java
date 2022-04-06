@@ -1,8 +1,7 @@
 package com.floweryu.example.zookeeper;
 
 import com.floweryu.example.ZookeeperApplication;
-import com.floweryu.example.bean.ZkClient;
-import org.junit.Test;
+import com.floweryu.example.cache.ZkClient;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,10 +17,5 @@ public class ZookeeperTest {
     
     @Autowired
     private ZkClient zkClient;
-    
-    @Test
-    public void createNodeTest() {
-        String zhang = zkClient.createNode("/floweryu/one", "zhang");
-        System.out.println(zhang);
-    }
+
 }
