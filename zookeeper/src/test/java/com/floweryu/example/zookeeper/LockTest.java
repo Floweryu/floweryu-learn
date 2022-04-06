@@ -1,15 +1,16 @@
 package com.floweryu.example.zookeeper;
 
-import com.floweryu.example.bean.ZkClient;
 import com.floweryu.example.bean.factory.ClientFactory;
 import com.floweryu.example.lock.ZkLock;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
-import org.apache.curator.framework.recipes.locks.InterProcessMultiLock;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.junit.Test;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author zhangjunfeng
