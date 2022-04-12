@@ -64,7 +64,7 @@ public class EchoClient {
                                 SocketChannel socketChannel = (SocketChannel) sk.channel();
                                 String next = scanner.next();
                                 // 向buffer中写入
-                                buffer.put((new Date(System.currentTimeMillis()) + " >> " + next).getBytes(StandardCharsets.UTF_8));
+                                buffer.put((" [" + new Date(System.currentTimeMillis()) + " >> " + next + "] ").getBytes(StandardCharsets.UTF_8));
                                 // 转换为读取模式
                                 buffer.flip();
                                 // 发送数据
