@@ -17,7 +17,7 @@ public class NettyDiscardHandler extends ChannelInboundHandlerAdapter {
         try {
             System.out.println("收到消息，丢弃如下：");
             while (in.isReadable()) {
-                System.out.println((char) in.readByte());
+                System.out.print((char) in.readByte());
             }
             System.out.println();
         } finally {

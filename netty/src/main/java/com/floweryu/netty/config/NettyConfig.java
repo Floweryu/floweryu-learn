@@ -6,5 +6,5 @@ package com.floweryu.netty.config;
  */
 public class NettyConfig {
     
-    public static final int PORT = 1234;
+    public static final int PORT = 12345;
 }
