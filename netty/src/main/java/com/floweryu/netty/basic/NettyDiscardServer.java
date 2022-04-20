@@ -25,22 +25,28 @@ public class NettyDiscardServer {
     }
     
     public void runServer() {
+        // 用来监听IO时间的线程组
         EventLoopGroup bossLoopGroup = new NioEventLoopGroup(1);
+        // 用来负责IO事件和Handler业务处理
         EventLoopGroup workerLoopGroup = new NioEventLoopGroup();
         
         try {
             // 1. 设置reactor线程组
+            // 也可以设置一个：这样监听和处理线程都是一个，易被阻塞
             serverBootstrap.group(bossLoopGroup, workerLoopGroup);
             // 2. 设置nio类型的channel
             serverBootstrap.channel(NioServerSocketChannel.class);
             // 3. 设置监听端口
             serverBootstrap.localAddress(serverPort);
-            // 4. 设置通道参数
+            // 4. 设置通道参数, 给父通道设置
+            // SO_KEEPALIVE 开启TCP底层心跳机制
             serverBootstrap.option(ChannelOption.SO_KEEPALIVE, true);
             serverBootstrap.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
+            // 给子通道设置参数
             serverBootstrap.childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
             
             // 5. 装配子通道流水线
+            // 在父通道成功接收一个连接并创建一个子通道后, 就会调用initChannel初始化子通道, 然后向子通道流水线增加业务处理器
             serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel socketChannel) throws Exception {
