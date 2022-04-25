@@ -35,6 +35,8 @@ public class CompareTest {
         Date date = new Date(time);
         System.out.println(time);
         System.out.println(date);
+        List<String> strings = Arrays.asList("", null);
+        System.out.println(strings);
     }
     
     @Test
