@@ -23,6 +23,14 @@
             <artifactId>hibernate-validator</artifactId>
             <version>7.0.1.Final</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.1-jre</version>
+        </dependency>
+
     </dependencies>
 
 </project>
