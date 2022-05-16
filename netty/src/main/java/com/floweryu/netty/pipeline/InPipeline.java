@@ -14,6 +14,8 @@ public class InPipeline {
         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
             System.out.println("入站处理器 A: 被回调 ");
             super.channelRead(ctx, msg);
+            // 移除该处理器
+            ctx.pipeline().remove(this);
         }
     }
     public static class SimpleInHandlerB extends ChannelInboundHandlerAdapter {
