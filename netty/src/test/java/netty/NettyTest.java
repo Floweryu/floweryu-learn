@@ -203,4 +203,25 @@ public class NettyTest {
         }
         cbuf.release();
     }
+    
+    @Test
+    public void sliceTest() {
+        ByteBuf buffer = ByteBufAllocator.DEFAULT.buffer(9, 1000);
+        System.out.println("分配ByteBuf: " + buffer);
+        buffer.writeBytes(new byte[]{1, 2, 3, 4});
+        System.out.println("写入字节: " + buffer);
+        ByteBuf slice = buffer.slice();
+        System.out.println("切片slice: " + slice);
+    }
+
+
+    @Test
+    public void duplicateTest() {
+        ByteBuf buffer = ByteBufAllocator.DEFAULT.buffer(9, 1000);
+        System.out.println("分配ByteBuf: " + buffer);
+        buffer.writeBytes(new byte[]{1, 2, 3, 4});
+        System.out.println("写入字节: " + buffer);
+        ByteBuf slice = buffer.duplicate();
+        System.out.println("切片slice: " + slice);
+    }
 }
