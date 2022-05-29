@@ -1,0 +1,14 @@
+// 定义proto协议版本
+syntax = "proto3";
+
+package com.floweryu.netty.protobuf.bean;
+
+// 生成POJO类将代码放入指定包中
+option java_package = "com.floweryu.netty.protobuf.bean";
+// 生成POJO类时的名称 
+option java_outer_classname = "MsgProtos";
+
+message Msg {
+  uint32 id = 1;
+  string conetent = 2;
+}
