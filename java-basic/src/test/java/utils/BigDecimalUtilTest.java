@@ -16,9 +16,25 @@ public class BigDecimalUtilTest {
     
     @Test
     public void mulTest() {
-        double a = 25080.82675;
-        double b = 0.01;
-        System.out.println(BigDecimalUtil.mul(a, b));
+        double origin = 7967.23445;
+        double income = 70108.7338;
+        double p1 = 0.22782275229083743;
+        double p2 = 0.07992950120609696;
+        System.out.println(1 - p1 - p2);
+        double p3 = 0.69;
+        System.out.println(0.1624478970424559 + 0.1096587953749356 + 0.7278933075826085);
+        double a =  10705.322016 + 7226.518396 + 47968.194066;
+        System.out.println("ssss: " + a);
+        
+        System.out.println(BigDecimalUtil.mul(origin, p1));
+        System.out.println(BigDecimalUtil.mul(origin, p2));
+        System.out.println(BigDecimalUtil.mul(origin, p3));
+        System.out.println(BigDecimalUtil.mul(origin, p1) + BigDecimalUtil.mul(origin, p2) + BigDecimalUtil.mul(origin, p3));
+        System.out.println("------------------------------");
+        System.out.println(BigDecimalUtil.mul(income, p1));
+        System.out.println(BigDecimalUtil.mul(income, p2));
+        System.out.println(BigDecimalUtil.mul(income, p3));
+        System.out.println(BigDecimalUtil.mul(income, p1) + BigDecimalUtil.mul(income, p2) + BigDecimalUtil.mul(income, p3));
     }
     
     @Test
