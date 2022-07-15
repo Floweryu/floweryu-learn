@@ -2,6 +2,10 @@ package utils;
 
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * @author zhangjunfeng
  * @date 2022/5/24 10:49
@@ -83,4 +87,25 @@ public class BigDecimalUtilTest {
         System.out.println(10742.61 + 5094.57 + 26315.47);
         System.out.println(11487.52 * 0.7 * 0.85);
     }
+    
+    @Test
+    public void roundModeTest() {
+        double incomeDayAdjusted = BigDecimalUtil.mul(46199.39, 0.8);
+        System.out.println(incomeDayAdjusted);
+        double shareDayAdjusted = incomeDayAdjusted * 0.7 * 0.8;
+        System.out.println(shareDayAdjusted);
+        
+        double shareMonthAdjusted = BigDecimalUtil.add(42606.7, shareDayAdjusted);
+        System.out.println(shareMonthAdjusted);
+        String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        System.out.println(today);
+        String yes = LocalDateTime.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        System.out.println(yes);
+    }
+    
+    @Test
+    public void dailyCalc() throws ParseException {
+        // 日流水
+    }
+    
 }
