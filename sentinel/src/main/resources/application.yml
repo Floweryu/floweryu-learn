@@ -1,0 +1,12 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: MySentinel
+  cloud:
+    sentinel:
+      eager: true
+      transport:
+        port: 8719  # 应用端的sentinel和sentinel控制台通信的端口
+        dashboard: localhost:8080
+        heartbeat-interval-ms: 500
