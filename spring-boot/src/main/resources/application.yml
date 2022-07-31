@@ -40,3 +40,6 @@ person:
         age: 8
       - {name: dog, age: 9}
     health: [{name: pig, age: 7}, {name: rabbit, age: 4}]
+  
+study:
+  enabled: true

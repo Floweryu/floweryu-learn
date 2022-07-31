@@ -4,6 +4,7 @@ import com.floweryu.example.annotation.bean.Car;
 import com.floweryu.example.annotation.bean.Pet;
 import com.floweryu.example.annotation.bean.User;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @EnableConfigurationProperties(Car.class)
 @ConditionalOnMissingBean(name = "Tom")
+@ConditionalOnProperty(prefix = "study", name = "enabled", havingValue = "true")
 @Import({User.class})
 public class MyConfig {
 
