@@ -16,7 +16,7 @@ public class SentinelController {
     
     @SentinelResource(value = "hello", blockHandler = "helloBlock")
     @GetMapping("/hello")
-    public String hello(String name) {
+    public String hello(String name) throws BlockException {
         SphU.entry("sss");
         return "hello" + name;
     }

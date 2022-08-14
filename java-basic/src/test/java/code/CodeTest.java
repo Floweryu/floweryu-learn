@@ -243,8 +243,30 @@ public class CodeTest {
         return ans;
     }
     
+    public int edgeScore(int[] edges) {
+        Map<Integer, Long> map = new TreeMap<>();
+        for (int i = 0; i < edges.length; i++) {
+            if (map.containsKey(edges[i])) {
+                map.put(edges[i], map.get(edges[i]) + i);
+            } else {
+                map.put(edges[i], (long) i);
+            }
+        }
+        System.out.println(map);
+        Integer maxKey = -1;
+        for (Integer key : map.keySet()) {
+            if (map.get(key)  > map.getOrDefault(maxKey, 0L)) {
+                maxKey = key;
+            }
+        }
+        return maxKey;
+    }
+    
     @Test
     public void codeTest() {
-        System.out.println(0);
+        int[] edges = new int[]{2,1,0,0,1,2};
+        int i = edgeScore(edges);
+        System.out.println(i);
     }
+    
 }
