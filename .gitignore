@@ -6,3 +6,6 @@
 mvnw*
 target
 xiaomi
+/learn-go/pkg/
+/learn-go/bin/
+/learn-go/.vscode/
