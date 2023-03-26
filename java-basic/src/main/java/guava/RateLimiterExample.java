@@ -9,7 +9,7 @@ import java.util.Date;
  * @date 2023/2/28 11:34
  */
 public class RateLimiterExample {
-    private static final RateLimiter rateLimiter = RateLimiter.create(1);
+    private static final RateLimiter rateLimiter = RateLimiter.create(2);
     
     public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {

@@ -3,6 +3,8 @@ package code.offer;
 /**
  * 剑指 Offer 51. 数组中的逆序对
  * https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/
+ * 归并排序和逆序对关系，比如下面例子：
+ * 假设有两个已排序的序列等待合并，L={8,12,16,22,100}  R={9,26,55,64,91}
  * @author zhangjunfeng
  * @date 2023/3/20 19:59
  */
