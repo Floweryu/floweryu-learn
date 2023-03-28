@@ -41,7 +41,7 @@ public class Common11 {
         return header.next;
     }
     
-    public void reverseLink(ListNode head) {
+    public ListNode reverseLink(ListNode head) {
         ListNode pre = null;
         ListNode cur = head;
         while (cur != null) {
@@ -54,6 +54,7 @@ public class Common11 {
             // 当前指针后移一个节点
             cur = next;
         }
+        return head;
     }
     
      public class ListNode {
