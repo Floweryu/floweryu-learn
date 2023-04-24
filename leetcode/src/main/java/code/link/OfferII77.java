@@ -1,6 +1,8 @@
 package code.link;
 
 /**
+ * 剑指 Offer II 077. 链表排序
+ * https://leetcode.cn/problems/7WHec2/description/
  * @author: zhangjunfeng
  * @createTime: 2023/04/20
  */
@@ -10,6 +12,12 @@ public class OfferII77 {
         return sortList(head, null);
     }
 
+    /**
+     * 方法一：自顶向下归并排序
+     * @param head
+     * @param tail
+     * @return
+     */
     public ListNode sortList(ListNode head, ListNode tail) {
         if (head == null) {
             return null;
@@ -39,25 +47,23 @@ public class OfferII77 {
         return res;
     }
 
+    /**
+     * 归并排序，要求背诵
+     */
     public ListNode merge(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(-1);
         ListNode cur = dummy;
-        while (l1 != null || l2 != null) {
-            int v1 = l1 == null ? 0 : l1.val;
-            int v2 = l2 == null ? 0 : l2.val;
-            if (v1 > v2) {
+        while (l1 != null && l2 != null) {
+            if (l1.val > l2.val) {
                 cur.next = l2;
+                l2 = l2.next;
             } else {
                 cur.next = l1;
-            }
-            cur = cur.next;
-            if (l1 != null) {
                 l1 = l1.next;
             }
-            if (l2 != null) {
-                l2 = l2.next;
-            }
+            cur = cur.next;
         }
+        cur.next = l1 == null ? l2 : l1;
         return dummy.next;
     }
 
