@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class LocalDateTest {
     @Test
@@ -15,5 +16,11 @@ public class LocalDateTest {
     
         System.out.println(LocalDateTime.of(1,1,1,0,0,0));
         System.out.println(LocalDate.of(2022, 6, 1));
+    }
+
+    @Test
+    public void optional() {
+        String test = null;
+        Optional<Boolean> u = Optional.ofNullable(test).map(Boolean::parseBoolean);
     }
 }
