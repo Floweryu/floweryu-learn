@@ -15,7 +15,9 @@ public class Offer39 {
         int halfLength = nums.length / 2;
         for (int num : nums) {
             Integer times = map.getOrDefault(num, 0);
+            // 这里使用++times是为了让times先+1
             map.put(num, ++times);
+            // 先把计数加1后再比较
             if (times > halfLength) {
                 return num;
             }
