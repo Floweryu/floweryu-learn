@@ -1,4 +1,4 @@
-package code.offer;
+package code.binary;
 
 /**
  * 剑指 Offer II 070. 排序数组中只出现一次的数字
