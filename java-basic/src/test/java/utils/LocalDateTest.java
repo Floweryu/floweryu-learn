@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Optional;
 
 public class LocalDateTest {
@@ -22,5 +24,16 @@ public class LocalDateTest {
     public void optional() {
         String test = null;
         Optional<Boolean> u = Optional.ofNullable(test).map(Boolean::parseBoolean);
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDate preMonthLastDay = LocalDate.now().minusMonths(1).with(TemporalAdjusters.lastDayOfMonth());
+        String format = df.format(preMonthLastDay);
+        System.out.println(format);
+
+        LocalDate of = LocalDate.of(2023, 1, 1);
+        LocalDate now = of.minusMonths(1);
+        int year = now.getYear();
+        int month = now.getMonthValue();
+        System.out.println(year);
+        System.out.println(month);
     }
 }
