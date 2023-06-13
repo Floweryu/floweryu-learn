@@ -2,10 +2,13 @@ package utils;
 
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Date;
 import java.util.Optional;
 
 public class LocalDateTest {
@@ -35,5 +38,11 @@ public class LocalDateTest {
         int month = now.getMonthValue();
         System.out.println(year);
         System.out.println(month);
+    }
+
+    @Test
+    public void time() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date parse = format.parse("2023-06-01");
     }
 }
