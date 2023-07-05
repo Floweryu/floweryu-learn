@@ -21,6 +21,8 @@ public class Offer96II {
         for (int i = 0; i <= len1; i++) {
             for (int j = 0; j <= len2; j++) {
                 int k = i + j - 1;
+                // 矩阵按行从左到右更新，每次更新仅需本行当前更新元素的前一个元素及前一行的同列元素
+                // 即每次更新只需要矩阵左侧和上侧元素，所以可以转为一维数组
                 if (i > 0) {
                     dp[i][j] = dp[i - 1][j] && s1.charAt(i - 1) == s3.charAt(k);
                 }
