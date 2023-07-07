@@ -1,5 +1,8 @@
 package code.dp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Floweryu
  * @date 2023/7/5 22:47
@@ -21,112 +24,133 @@ package code.dp;
 public class TransportationProblem {
 
     public static void main(String[] args) {
-        // 货物数据
-        int[] weights = {30, 50}; // 货物重量
-        int[] volumes = {10, 20}; // 货物体积
+        Goods g1 = new Goods(30, 10, 10);
+        Goods g2 = new Goods(50, 20, 5);
+        Goods[] goods = new Goods[]{g1, g2};
+        Vehicle v1 = new Vehicle(40, 30, 8);
+        Vehicle v2 = new Vehicle(60, 50, 6);
+        Vehicle v3 = new Vehicle(90, 80, 4);
+        Vehicle[] vehicles = new Vehicle[]{v1, v2, v3};
+        int minimumCost = findMinimumCost(goods, vehicles);
+        System.out.println(minimumCost);
+    }
 
-        // 车型数据
-        int[] maxWeights = {30, 50, 80}; // 车型最大载重
-        int[] maxVolumes = {40, 60, 90}; // 车型最大装载体积
-        int[][] volumePrices = {
-                {8, 6, 4, 5}, // 车型A体积单价
-                {8, 6, 4, 5}, // 车型B体积单价
-                {8, 6, 4, 5}  // 车型C体积单价
-        };
-        int[][] weightPrices = {
-                {10, 8, 6, 7}, // 车型A重量单价
-                {10, 8, 6, 7}, // 车型B重量单价
-                {10, 8, 6, 7}  // 车型C重量单价
-        };
+    public static int findMinimumCost(Goods[] goods, Vehicle[] vehicles) {
+        int N = goods.length;
+        int M = vehicles.length;
 
-        int n = weights.length; // 货物种类数
-        int m = maxWeights.length; // 车型种类数
+        int[][] dp = new int[N + 1][M + 1];
+        int[][] prev = new int[N + 1][M + 1];
 
-        // 动态规划求解最小费用
-        int[][][] dp = new int[n + 1][m + 1][2];
-        int INF = Integer.MAX_VALUE / 2; // 初始费用设置为无穷大的一半
-
-        // 初始化dp数组
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
-                dp[i][j][0] = INF; // 体积费用
-                dp[i][j][1] = INF; // 重量费用
-            }
+        // 初始化第一行和第一列的值为0
+        for (int j = 0; j <= M; j++) {
+            dp[0][j] = Integer.MAX_VALUE;
+        }
+        for (int i = 1; i <= N; i++) {
+            dp[i][0] = Integer.MAX_VALUE;
         }
 
-        // 状态转移
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
-                // 计算货物i的体积费用和重量费用
-                int volumeCost = 0;
-                int weightCost = 0;
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j <= M; j++) {
+                int minCost = dp[i - 1][j]; // 不选择当前货物i
+                int prevIndex = j; // 默认前一个状态是选择当前车型
+                Goods currentGoods = goods[i - 1];
+                Vehicle currentVehicle = vehicles[j - 1];
 
-                // 找到适合的体积单价区间
-                int volumeIndex = getVolumeIndex(volumes[i - 1], volumePrices[j - 1]);
-
-                // 计算体积费用
-                if (volumeIndex != -1) {
-                    volumeCost = volumes[i - 1] * volumePrices[j - 1][volumeIndex];
-                }
-
-                // 找到适合的重量单价区间
-                int weightIndex = getWeightIndex(weights[i - 1], weightPrices[j - 1]);
-
-                // 计算重量费用
-                if (weightIndex != -1) {
-                    weightCost = weights[i - 1] * weightPrices[j - 1][weightIndex];
-                }
-
-                // 更新dp数组
-                for (int k = 1; k <= m; k++) {
-                    if (volumes[i - 1] <= maxVolumes[k - 1] && weights[i - 1] <= maxWeights[k - 1]) {
-                        // 考虑按体积计费的情况
-                        if (dp[i - 1][k - 1][0] != INF) {
-                            dp[i][j][0] = Math.min(dp[i][j][0], dp[i - 1][k - 1][0] + volumeCost);
-                        }
-
-                        // 考虑按重量计费的情况
-                        if (dp[i - 1][k - 1][1] != INF) {
-                            dp[i][j][1] = Math.min(dp[i][j][1], dp[i - 1][k - 1][1] + weightCost);
-                        }
+                if (currentGoods.getCount() > 0 && currentVehicle.getMaxLoad() >= currentGoods.getWeight()
+                        && currentVehicle.getMaxVolume() >= currentGoods.getVolume()) {
+                    int cost = currentGoods.getVolume() * currentVehicle.getVolumePrice();
+                    if (dp[i][j - 1] + cost < minCost) {
+                        minCost = dp[i][j - 1] + cost;
+                        prevIndex = j - 1; // 选择当前货物i和车型j
+                        currentGoods.count -= 1; // 装载当前货物到车型j
                     }
                 }
+
+                dp[i][j] = minCost;
+                prev[i][j] = prevIndex;
+                currentGoods.count += 1; // 恢复货物个数
             }
         }
 
-        // 找到最小费用
-        int minCost = INF;
-        for (int j = 1; j <= m; j++) {
-            minCost = Math.min(minCost, Math.min(dp[n][j][0], dp[n][j][1]));
+        // 构建最优运输车型组合
+        List<Integer> selectedVehicles = new ArrayList<>();
+        int i = N;
+        int j = M;
+        while (i > 0 && j > 0) {
+            if (prev[i][j] == j - 1) {
+                selectedVehicles.add(j);
+                Goods currentGoods = goods[i - 1];
+                currentGoods.count -= 1;
+            }
+            j = prev[i][j];
+            i--;
         }
 
-        // 输出结果
-        System.out.println("最小费用为：" + minCost);
+    // 输出最优运输车型组合
+        System.out.println("最优运输车型组合：");
+        for (int k = selectedVehicles.size() - 1; k >= 0; k--) {
+            System.out.println("货物" + (N - k) + "：" + "车型" + selectedVehicles.get(k));
+        }
+
+        return dp[N][M];
+    }
+}
+
+
+
+class Goods {
+    int volume;
+    int weight;
+    int count;
+    // 其他属性和构造函数
+    Goods(int volume, int weight, int count) {
+        this.volume = volume;
+        this.weight = weight;
+        this.count = count;
     }
 
-    // 辅助函数：根据货物体积和车型体积单价，找到合适的体积单价区间
-    private static int getVolumeIndex(int volume, int[] volumePrices) {
-        int n = volumePrices.length;
-
-        for (int i = 0; i < n - 1; i++) {
-            if (volumePrices[i] >= volume) {
-                return i;
-            }
-        }
-
-        return -1;
+    // 获取货物的体积
+    public int getVolume() {
+        return volume;
     }
 
-    // 辅助函数：根据货物重量和车型重量单价，找到合适的重量单价区间
-    private static int getWeightIndex(int weight, int[] weightPrices) {
-        int n = weightPrices.length;
+    // 获取货物的重量
+    public int getWeight() {
+        return weight;
+    }
 
-        for (int i = 0; i < n - 1; i++) {
-            if (weightPrices[i] >= weight) {
-                return i;
-            }
-        }
+    // 获取货物的个数
+    public int getCount() {
+        return count;
+    }
+}
 
-        return -1;
+class Vehicle {
+    int maxLoad;
+    int maxVolume;
+    int volumePrice;
+    // 其他属性和构造函数
+
+
+    public Vehicle(int maxLoad, int maxVolume, int volumePrice) {
+        this.maxLoad = maxLoad;
+        this.maxVolume = maxVolume;
+        this.volumePrice = volumePrice;
+    }
+
+    // 获取车型的载重
+    public int getMaxLoad() {
+        return maxLoad;
+    }
+
+    // 获取车型的装载体积
+    public int getMaxVolume() {
+        return maxVolume;
+    }
+
+    // 获取车型的体积单价
+    public int getVolumePrice() {
+        return volumePrice;
     }
 }
