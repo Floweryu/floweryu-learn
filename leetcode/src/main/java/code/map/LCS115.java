@@ -3,6 +3,9 @@ package code.map;
 import java.util.*;
 
 /**
+ * LCR 115. 序列重建
+ * https://leetcode.cn/problems/ur2n8P/description/?envType=study-plan-v2&envId=coding-interviews-special
+ * 该问题可以转化为：判断是否仅有一个拓扑排序。唯一的超序列即只有一个拓扑排序
  * @author: zhangjunfeng
  * @createTime: 2023/09/12
  */
@@ -22,7 +25,7 @@ public class LCS115 {
         }
 
         Queue<Integer> queue = new LinkedList<>();
-        for (int i = 0; i < in.length; i++) {
+        for (int i = 1; i < in.length; i++) {
             if (in[i] == 0) {
                 queue.offer(i);
             }
@@ -37,6 +40,7 @@ public class LCS115 {
             List<Integer> nextList = map.get(node);
             if (nextList != null) {
                 for (Integer next : nextList) {
+                    in[next]--;
                     if (in[next] == 0) {
                         queue.offer(next);
                     }
@@ -44,5 +48,11 @@ public class LCS115 {
             }
         }
         return true;
+    }
+
+    public static void main(String[] args) {
+        LCS115 lcs115 = new LCS115();
+        int[][] arr = {{1, 2}, {1, 3}};
+        lcs115.sequenceReconstruction(new int[]{1, 2, 3}, arr);
     }
 }
