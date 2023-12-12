@@ -49,6 +49,7 @@ public class OfferII70 {
                 right = mid;
             }
         }
+
         return nums[right];
     }
 
