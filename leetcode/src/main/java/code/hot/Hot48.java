@@ -2,6 +2,7 @@ package code.hot;
 
 /**
  * 48. 旋转图像
+ * 沿着对角线反转矩阵，然后倒着排序每一行
  * @author Floweryu
  * @date 2024/2/29 15:42:35
  */
