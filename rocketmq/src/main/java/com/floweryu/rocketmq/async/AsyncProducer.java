@@ -32,6 +32,7 @@ public class AsyncProducer {
             Message message = new Message("TopicTest", "TagA", "test1", "Hello world".getBytes(RemotingHelper.DEFAULT_CHARSET));
             
             // SendCallback 接收异步返回结果的回调
+            producer.setRetryTimesWhenSendAsyncFailed(3);
             producer.send(message, new SendCallback() {
                 @Override
                 public void onSuccess(SendResult sendResult) {
