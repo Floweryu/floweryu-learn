@@ -5,9 +5,9 @@ package code.tree;
  * @createTime: 2023/04/28
  */
 public class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
 
     TreeNode() {
     }
