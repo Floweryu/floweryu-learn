@@ -13,8 +13,11 @@ public class Hot437 {
         if (root == null) {
             return 0;
         }
+        // 递归根节点
         dpTree(root, targetSum);
+        // 递归左子树
         pathSum(root.left, targetSum);
+        // 递归右子树
         pathSum(root.right, targetSum);
         return ans;
     }
