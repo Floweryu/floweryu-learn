@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
+ * 994. 腐烂的橘子
  * @author Floweryu
  * @date 2024/3/6 20:38:13
  */
@@ -27,13 +28,14 @@ public class Hot994 {
         }
 
         int ans = 0;
-        while (!queue.isEmpty()) {
+        while (flash > 0 && !queue.isEmpty()) {
+            // 每次队列中腐烂的橘子清空则说明已经走1min
             ans++;
             int size = queue.size();
             for (int i = 0; i < size; i++) {
                 int[] poll = queue.poll();
                 for (int r = 0; r < 4; r++) {
-                    int m = poll[0] + ir[0];
+                    int m = poll[0] + ir[r];
                     int n = poll[1] + jr[r];
                     if ((m >= 0 && m < row) && (n >= 0 && n < col)
                             && grid[m][n] == 1) {
