@@ -2,6 +2,7 @@
 *.iws
 *.iml
 *.ipr
+*.class
 .mvn
 mvnw*
 target
