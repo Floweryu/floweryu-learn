@@ -19,7 +19,10 @@ public class CommonController {
 
     @GetMapping("/cache")
     public String cacheQuery(Integer id) {
-        return commonService.cacheGet(id);
+        if (id % 2 == 0) {
+            return commonService.cacheGet1(id);
+        }
+        return commonService.cacheGet2(id);
     }
 
 }
