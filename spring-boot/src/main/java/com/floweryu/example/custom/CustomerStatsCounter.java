@@ -38,14 +38,19 @@ public class CustomerStatsCounter implements StatsCounter {
 
     @Override
     public void recordHits(int count) {
+        System.out.println("count: " + count);
         hitCount.add(count);
+        double hitRate = hitRate();
         System.out.println("hitCount: " + hitCount);
+        System.out.println("hitRate: " + hitRate);
     }
 
     @Override
     public void recordMisses(int count) {
         missCount.add(count);
+        double missRate = missRate();
         System.out.println("missCount: " + missCount);
+        System.out.println("missRate: " + missRate);
     }
 
     @Override

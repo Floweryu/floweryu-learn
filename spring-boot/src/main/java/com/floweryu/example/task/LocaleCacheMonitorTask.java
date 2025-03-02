@@ -21,7 +21,7 @@ public class LocaleCacheMonitorTask {
     @Autowired
     private List<CacheManager> cacheManagerList;
 
-    @Scheduled(fixedDelay = 10000)
+    //@Scheduled(fixedDelay = 10000)
     public void monitor() {
         for (CacheManager cacheManager : cacheManagerList) {
             Collection<String> cacheNameList = cacheManager.getCacheNames();
