@@ -12,8 +12,6 @@
     <artifactId>nacos-demo</artifactId>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
         <nacos-config-spring-boot.version>0.2.11</nacos-config-spring-boot.version>
     </properties>
 
